@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    color:white;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+
+.box{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+    color:#ff4d6d;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+#yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+#no{
+    background:#ddd;
+}
+
+/* Fireworks */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+    from{transform:scale(1);}
+    to{transform:scale(15);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>💖 Goodness 💖</h1>
+    <h2>Will you be my Valentine and my lover? ❤️</h2>
+
+    <button id="yes">YES 💕</button>
+    <button id="no">NO 😅</button>
+</div>
+
+<script>
+/* Moving NO button */
+const noBtn = document.getElementById("no");
+
+noBtn.addEventListener("mouseover", ()=>{
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.position="absolute";
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+});
+
+/* Floating hearts generator */
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*25)+"px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
+/* Fireworks + redirect */
+document.getElementById("yes").onclick=function(){
+
+    for(let i=0;i<30;i++){
+        let fw=document.createElement("div");
+        fw.className="firework";
+        fw.style.left=Math.random()*100+"vw";
+        fw.style.top=Math.random()*100+"vh";
+        document.body.appendChild(fw);
+
+        setTimeout(()=>fw.remove(),1000);
+    }
+
+    setTimeout(()=>{
+        window.location.href="letter.html";
+    },1200);
+}
+</script>
+
+</body>
+</html>
